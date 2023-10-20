@@ -1,26 +1,59 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import 'dotenv/config'
+import HeaderComponent from "./components/header.component";
+import NavComponent from "./components/nav.component";
+
+import Routes from "./router/routes";
+
+import PostsContainer from "./views/posts/posts.container";
+import PostsIndexComponent from "./views/posts/posts-index.component";
+import PostsNewComponent from "./views/posts/posts-new.component";
+import PostsShowComponent from "./views/posts/posts-show.component";
+import PostsUpdateComponent from "./views/posts/posts-update.component";
+
+import './styles/main.scss';
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const router = createBrowserRouter([
+        {
+            path: Routes.POSTS_INDEX_PATH,
+            element: <PostsContainer />,
+            children: [
+                {
+                    path: Routes.POSTS_INDEX_PATH,
+                    element: <PostsIndexComponent />
+                },
+                {
+                    path: Routes.POSTS_NEW_PATH,
+                    element: <PostsNewComponent />
+                },
+                {
+                    path: Routes.POSTS_SHOW_PATH,
+                    element: <PostsShowComponent />
+                },
+                {
+                    path: Routes.POSTS_UPDATE_PATH,
+                    element: <PostsUpdateComponent />
+                }
+            ]
+        },
+    ]);
+
+    return (
+        <>
+            <HeaderComponent />
+            <div className="container-fluid">
+                <div className="row">
+                    <NavComponent />
+                    <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                        <RouterProvider router={router} />
+                    </main>
+                </div>
+            </div>
+
+        </>
+    );
 }
 
 export default App;

@@ -1,0 +1,18 @@
+// 1-Abstracts
+
+// 2-Vendors
+@import "bootstrap/scss/bootstrap";
+
+// 3-Base
+
+// 4-Components
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  padding: 48px 0 0;
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
